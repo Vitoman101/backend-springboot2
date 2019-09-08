@@ -23,6 +23,7 @@ public class Advert {
 	private int pricePerUnit;		//Price per unit is how much money it costs per unitOfMeasure
 	private String unitOfMeasure;	//Unit of measure is used for string because it can be either number of minutes or a string 
 	private User user;
+	private Course course;
 
 	public Advert() {
 		
@@ -100,11 +101,22 @@ public class Advert {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@ManyToOne
+    @JoinColumn(name="course_id", nullable=false)
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
 	@Override
 	public String toString() {
 		return "Advert [id=" + id + ", title=" + title + ", description=" + description + ", datePosted=" + datePosted
-				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", user=" + user + "]";
+				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", user=" + user + ", course="
+				+ course + "]";
 	}
 	
 }
