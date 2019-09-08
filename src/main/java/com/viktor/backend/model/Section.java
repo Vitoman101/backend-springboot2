@@ -4,70 +4,60 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import javax.persistence.Column;
 
 @Entity
-@Table(name = "courses")
-public class Course {
+@Table(name="sections")
+public class Section {
 	
 	private long id;
 	private String title;
-	private String code;
-	private Section section;
+	private String description;
 	
-	public Course() {
-	
-	}
-	
-	public Course(long id, String title, String code) {
-		this.title = title;
-		this.code = code;
+	public Section() {
+		
 	}
 
+	public Section(long id, String title, String description) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	@Column(name = "title", nullable = false)
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	@Column(name = "code", nullable = false)
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
+
+	@Column(name = "description", nullable = false)
+	public String getDescription() {
+		return description;
 	}
 
-	@ManyToOne
-    @JoinColumn(name="section_id", nullable=false)
-	public Section getSection() {
-		return section;
-	}
-
-	public void setSection(Section section) {
-		this.section = section;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", code=" + code + "]";
+		return "Section [id=" + id + ", title=" + title + ", description=" + description + "]";
 	}
-	
 	
 }
