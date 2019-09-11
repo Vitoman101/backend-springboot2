@@ -27,6 +27,9 @@ public class CourseController {
 	@Autowired
 	private CourseRepository courseRepository;
 	
+	@Autowired
+	private SectionRepository sectionRepository;
+	
 	@GetMapping("/courses")
 	public List<Course> getAllCourses() {
         return courseRepository.findAll();
@@ -40,8 +43,13 @@ public class CourseController {
 				return ResponseEntity.ok().body(course);
 	}
 	
-	@PostMapping("/courses")
-	public Course createCourse(@Valid @RequestBody Course course) {
+	@PostMapping("/courses/{sectionId}")
+	public Course createCourse(@PathVariable(value = "sectionId") Long sectionId,
+								@Valid @RequestBody Course course) 
+		throws ResourceNotFoundException {
+		Section section = sectionRepository.findById(sectionId)
+				.orElseThrow(() -> new ResourceNotFoundException("Course not found for this id: " + sectionId));
+		course.setSection(section);
 		return courseRepository.save(course);
 	}
 	
@@ -53,6 +61,7 @@ public class CourseController {
 		
 		course.setTitle(courseDetails.getTitle());
 		course.setCode(courseDetails.getCode());
+		course.setSection(courseDetails.getSection());
 		
 	
 		final Course updatedCourse = courseRepository.save(course);

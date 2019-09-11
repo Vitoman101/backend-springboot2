@@ -23,9 +23,10 @@ public class Course {
 	
 	}
 	
-	public Course(long id, String title, String code) {
+	public Course(long id, String title, String code, Section section) {
 		this.title = title;
 		this.code = code;
+		this.section = section;
 	}
 
 
@@ -66,8 +67,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", code=" + code + "]";
+		return "Course [id=" + id + ", title=" + title + ", code=" + code + ", section=" + section + "]";
 	}
-	
-	
+
 }
