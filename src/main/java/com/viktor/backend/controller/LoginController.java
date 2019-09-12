@@ -27,6 +27,9 @@ public class LoginController {
 	@Autowired
 	private LoginRepository loginRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@GetMapping("/logins")
 	public List<Login> getAllLogins() {
         return loginRepository.findAll();
@@ -40,10 +43,15 @@ public class LoginController {
 				return ResponseEntity.ok().body(login);
 	}
 	
-	@PostMapping("/logins")
-	public Login createLogin(@Valid @RequestBody Login login) {
+	@PostMapping("/logins/{userId}")
+	public Login createLogin(@PathVariable(value = "userId") Long userId,
+			@Valid @RequestBody Login login) 
+					throws ResourceNotFoundException {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + userId));
+		login.setUser(user);
 		return loginRepository.save(login);
-	}
+}
 	
 	@PutMapping("/logins/{id}")
 	public ResponseEntity<Login> updateLogin(@PathVariable(value = "id") Long loginId,

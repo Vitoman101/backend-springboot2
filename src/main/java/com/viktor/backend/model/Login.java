@@ -23,9 +23,10 @@ public class Login {
 		
 	}
 	
-	public Login(String username, String password) {
+	public Login(String username, String password, User user) {
 		this.username = username;
 		this.password = password;
+		this.user = user;
 	}
 	
 	@Id
@@ -68,7 +69,7 @@ public class Login {
 	
 	@Override
 	public String toString() {
-		return "Login [id=" + id + ", username=" + username + ", password,=" + password + ", userId=" + user.getId() + "]";
+		return "Login [id=" + id + ", username=" + username + ", password,=" + password + ", user=" + user + "]";
 	}
 	
 }
