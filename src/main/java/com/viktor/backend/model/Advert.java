@@ -29,12 +29,14 @@ public class Advert {
 		
 	}
 	
-	public Advert(String title, String desc, Date datePosted, int pricePerUnit, String unitOfMeasure) {
+	public Advert(String title, String desc, Date datePosted, int pricePerUnit, String unitOfMeasure, User user, Course course) {
 		this.title = title;
 		this.description = desc;
 		this.datePosted = datePosted;
 		this.pricePerUnit = pricePerUnit;
 		this.unitOfMeasure = unitOfMeasure;
+		this.user = user;
+		this.course = course;
 	}
 	
 	@Id
@@ -115,8 +117,8 @@ public class Advert {
 	@Override
 	public String toString() {
 		return "Advert [id=" + id + ", title=" + title + ", description=" + description + ", datePosted=" + datePosted
-				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", user=" + user + ", course="
-				+ course + "]";
+				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", user=" + user.getId() + ", course="
+				+ course.getId() + "]";
 	}
 	
 }

@@ -48,7 +48,7 @@ public class CourseController {
 								@Valid @RequestBody Course course) 
 		throws ResourceNotFoundException {
 		Section section = sectionRepository.findById(sectionId)
-				.orElseThrow(() -> new ResourceNotFoundException("Course not found for this id: " + sectionId));
+				.orElseThrow(() -> new ResourceNotFoundException("Section not found for this id: " + sectionId));
 		course.setSection(section);
 		return courseRepository.save(course);
 	}
