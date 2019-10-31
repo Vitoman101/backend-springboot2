@@ -29,8 +29,8 @@ public class AdvertController {
 	@Autowired
 	private AdvertRepository advertRepository;
 
-	@Autowired
-	private UserRepository userRepository;
+/*	@Autowired
+	private UserRepository userRepository;*/
 
 	@Autowired
 	private CourseRepository courseRepository;
@@ -48,16 +48,15 @@ public class AdvertController {
 				return ResponseEntity.ok().body(advert);
 	}
 
-    @PostMapping("/adverts/{userId}/{courseId}")
-    public Advert createAdvert(@PathVariable(value = "userId") Long userId,
-                               @PathVariable(value = "courseId") Long courseId,
+    @PostMapping("/adverts/{courseId}")
+    public Advert createAdvert(@PathVariable(value = "courseId") Long courseId,
                                @Valid @RequestBody Advert advert)
             throws ResourceNotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + userId));
+        /*User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + userId));*/
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course not found for this id: " + courseId));
-        advert.setUser(user);
+        //advert.setUser(user);
         advert.setCourse(course);
         return advertRepository.save(advert);
     }
@@ -73,6 +72,8 @@ public class AdvertController {
 		advert.setPricePerUnit(advertDetails.getPricePerUnit());
 		advert.setUnitOfMeasure(advertDetails.getUnitOfMeasure());
 		advert.setDatePosted(advertDetails.getDatePosted());
+		advert.setNicknamePoster(advertDetails.getNicknamePoster());
+		advert.setPhone(advertDetails.getPhone());
 	
 		final Advert updatedAdvert = advertRepository.save(advert);
 		return ResponseEntity.ok(updatedAdvert);

@@ -22,21 +22,25 @@ public class Advert {
 	private Date datePosted;
 	private int pricePerUnit;		//Price per unit is how much money it costs per unitOfMeasure
 	private String unitOfMeasure;	//Unit of measure is used for string because it can be either number of minutes or a string 
-	private User user;
+	private String nicknamePoster;
+	private String phone;
+	//private User user;
 	private Course course;
 
 	public Advert() {
 		
 	}
 	
-	public Advert(String title, String desc, Date datePosted, int pricePerUnit, String unitOfMeasure, User user, Course course) {
+	public Advert(String title, String desc, Date datePosted, int pricePerUnit, String unitOfMeasure,
+				  String nicknamePoster,String phone , Course course) {
 		this.title = title;
 		this.description = desc;
 		this.datePosted = datePosted;
 		this.pricePerUnit = pricePerUnit;
 		this.unitOfMeasure = unitOfMeasure;
-		this.user = user;
+		this.nicknamePoster = nicknamePoster;
 		this.course = course;
+		this.phone = phone;
 	}
 	
 	@Id
@@ -93,7 +97,18 @@ public class Advert {
 	public void setUnitOfMeasure(String unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
 	}
-	
+
+	@Column(name = "nickname_poster", nullable = false)
+	public String getNicknamePoster() { return nicknamePoster; }
+
+	public void setNicknamePoster(String nicknamePoster) {this.nicknamePoster = nicknamePoster; }
+
+	@Column(name = "phone", nullable = false)
+	public String getPhone() { return phone; }
+
+	public void setPhone(String phone) { this.phone = phone; }
+
+	/*
 	@ManyToOne
     @JoinColumn(name="user_id", nullable=false)
 	public User getUser() {
@@ -103,6 +118,7 @@ public class Advert {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	 */
 	
 	@ManyToOne
     @JoinColumn(name="course_id", nullable=false)
@@ -117,7 +133,7 @@ public class Advert {
 	@Override
 	public String toString() {
 		return "Advert [id=" + id + ", title=" + title + ", description=" + description + ", datePosted=" + datePosted
-				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", user=" + user.getId() + ", course="
+				+ ", pricePerUnit=" + pricePerUnit + ", unitOfMeasure=" + unitOfMeasure + ", nicknamePoster=" + nicknamePoster + ", phone=" + phone + ", course="
 				+ course.getId() + "]";
 	}
 	
